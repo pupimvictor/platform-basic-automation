@@ -2,8 +2,6 @@
 
 __DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
-echo __DIR
-
 source $__DIR/helpers.sh
 
 function download_om () {
@@ -16,6 +14,16 @@ function download_om () {
     local release_location=$(printf $release_url $version $bin_name)
 
     download_and_install $release_location /usr/local/bin/om
+}
+
+function download_uaa () {
+    local version="${1:-0.10.0}"
+    local arch="${2:-linux-amd64}"
+
+    local release_location="https://github.com/cloudfoundry-incubator/uaa-cli/releases/download/0.10.0/uaa-$arch-$version"
+    local bin_name="uaa-$arch-$version"
+    
+    download_and_install $release_location /usr/local/bin/uaa
 }
 
 function download_jq () {
