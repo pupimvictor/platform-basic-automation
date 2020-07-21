@@ -1,0 +1,13 @@
+{
+  "name": "nsx_ing_controller_false",
+  "description": "Use the nsx_lb with a 3rd party ingress controller",
+  "parameters": {
+    "cni_configurations": {
+      "type": "nsxt",
+      "parameters": {
+        "nsx_lb": true,
+        "nsx_ingress_controller": false
+      }
+    }
+  }
+}

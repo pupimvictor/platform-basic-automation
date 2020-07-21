@@ -1,0 +1,66 @@
+configInline:
+  # should contour expect to be running inside a k8s cluster
+  incluster: true
+  accesslog-format: envoy
+  # To enable JSON logging in Envoy
+  # accesslog-format: json
+  # The default fields that will be logged are specified below.
+  # To customise this list, just add or remove entries.
+  # The canonical list is available at
+  # https://godoc.org/github.com/projectcontour/contour/internal/envoy#JSONFields
+  json-fields:
+    - "@timestamp"
+    - "authority"
+    - "downstream_local_address"
+    - "downstream_remote_address"
+    - "method"
+    - "path"
+    - "protocol"
+    - "request_id"
+    - "requested_server_name"
+    - "response_code"
+    - "upstream_cluster"
+    - "upstream_host"
+    - "upstream_local_address"
+    - "upstream_service_time"
+    - "user_agent"
+    - "x_forwarded_for"
+
+replicaCount: 2
+
+contour:
+  enabled: true
+
+envoy:
+  enabled: true
+  ## Pod host network access
+  ## ref: https://kubernetes.io/docs/concepts/policy/pod-security-policy/#host-namespaces
+  ##
+  hostNetwork: false
+
+  ## Pod's DNS Policy
+  ## ref: https://kubernetes.io/docs/concepts/services-networking/dns-pod-service/#pod-s-dns-policy
+  ##
+  dnsPolicy: ClusterFirst
+
+  logLevel: debug
+
+  ## Envoy Service properties
+  ##
+  service:
+    ## Service type
+    ##
+    type: LoadBalancer
+    externalTrafficPolicy: Local
+
+    ## Service annotations
+    ##
+    annotations: {}
+
+    ports:
+      ## HTTP Port
+      ##
+      http: 80
+      ## HTTPS Port
+      ##
+      https: 443
