@@ -1,0 +1,29 @@
+# apiVersion: extensions/v1beta1
+# kind: Ingress
+# metadata:
+#   name: nginx-dev
+#   annotations:
+#     kubernetes.io/ingress.class: contour
+# spec:
+#   rules:
+#   - host: nginx.dev.bekind.page
+#     http:
+#       paths:
+#       - backend:
+#           serviceName: nginx
+#           servicePort: 80
+
+
+---
+apiVersion: projectcontour.io/v1
+kind: HTTPProxy
+metadata:
+  name: nginx-dev
+  namespace: default
+spec:
+  virtualhost:
+    fqdn: nginx.dev.bekind.page
+    routes:
+    - services:
+      - name: nginx
+        port: 80

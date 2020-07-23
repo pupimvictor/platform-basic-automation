@@ -126,6 +126,10 @@ function apply_ingress_spec () {
   return 1
 }
 
+function deploy_cert_manager {
+
+}
+
 function apply_storage_class () {
   printHeader "cerating default storage classes for $ENV"
 
