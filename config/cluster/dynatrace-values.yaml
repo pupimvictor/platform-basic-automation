@@ -1,0 +1,30 @@
+platform: "kubernetes"
+operator:
+  image: ""
+oneagent:
+  name: "oneagent"
+  apiUrl: "https://ENVIRONMENTID.live.dynatrace.com/api"
+  image: ""
+  args:
+  - --set-app-log-content-access=true
+  env:
+  - name: ONEAGENT_ENABLE_VOLUME_STORAGE
+    value: "true"
+  - name: ONEAGENT_CONTAINER_STORAGE_PATH
+    value: /var/vcap/store
+  nodeSelector: {}
+  labels: {}
+  skipCertCheck: false
+  disableAgentUpdate: false
+  enableIstio: false
+  dnsPolicy: ""
+  resources: {}
+  waitReadySeconds: null
+  priorityClassName: ""
+  serviceAccountName: ""
+  proxy: ""
+  trustedCAs: ""
+secret:
+  apiToken: "$DYNATRACE_API_TOKEN"
+  paasToken: "$PLATFORM_AS_A_SERVICE_TOKEN"
+

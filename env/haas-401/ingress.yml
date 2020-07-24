@@ -1,29 +1,29 @@
-# apiVersion: extensions/v1beta1
-# kind: Ingress
-# metadata:
-#   name: nginx-dev
-#   annotations:
-#     kubernetes.io/ingress.class: contour
-# spec:
-#   rules:
-#   - host: nginx.dev.bekind.page
-#     http:
-#       paths:
-#       - backend:
-#           serviceName: nginx
-#           servicePort: 80
+# these 2 yaml objs do the same thing:
+# Creates a route to company-mgmt service passing through Contour's Envoy Proxy LB
 
-
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: company-mgmt-dev
+  annotations:
+    kubernetes.io/ingress.class: contour
+spec:
+  rules:
+  - host: company-mgmt.dev1.pks.arbfile.org
+    http:
+      paths:
+      - backend:
+          serviceName: company-mgmt
+          servicePort: 3000
 ---
 apiVersion: projectcontour.io/v1
 kind: HTTPProxy
 metadata:
-  name: nginx-dev
-  namespace: default
+  name: company-mgmt-dev
 spec:
   virtualhost:
-    fqdn: nginx.dev.bekind.page
+    fqdn: company-mgmt.dev1.pks.arbfile.org
     routes:
     - services:
-      - name: nginx
-        port: 80
+      - name: company-mgmt
+        port: 3000

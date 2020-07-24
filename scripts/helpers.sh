@@ -39,23 +39,23 @@ function checkExecutable() {
 
 function printStatusMsg {
   echo ""
-  echo "============= $@ ============="
+  echo "============= $* ============="
   echo ""
 }
 
 function printHeader () {
   echo ""
-  echo ">>>>>>>>>>>>> $@ <<<<<<<<<<<<<"
+  echo ">>>>>>>>>>>>> $* <<<<<<<<<<<<<"
   echo ""
 }
 
 function printInfo {
-  echo "[INFO] create-cluster.sh: $@"
+  echo "[INFO]: $*"
   echo ""
 }
 
 function printErr {
-  echo "[ERROR] create-cluster.sh: $@"
+  >&2 echo "[ERROR]: $*"
 }
 
 
