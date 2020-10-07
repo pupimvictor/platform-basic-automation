@@ -6,7 +6,7 @@ source $__DIR/helpers.sh
 
 function download_om () {
     local version="${1:-5.0.0}"
-    local arch="${2:-linux}"
+    local arch="${2:- b linux}"
 
     local release_url="https://github.com/pivotal-cf/om/releases/download/%s/%s"
     local bin_name="om-$arch-$version"

@@ -3,7 +3,7 @@
 function setup_required_environment_context {
 cat << EOF
 ----------------------------------------------------------------
-The following env vars will be used when running
+The following env vars will be used when running 
 your acceptance test. Please be sure to set them properly
 ----------------------------------------------------------------
 
@@ -22,11 +22,11 @@ your acceptance test. Please be sure to set them properly
   export TZ_SKIP_SSL=...
             (optional) PKS API skip TLS validation
 
-
+  
   >>>>>>> Create a file under a environment directory  <<<<<<<<
   >>>>>>> to export those env varibles and export      <<<<<<<<
   >>>>>>> PKS_CLUSTER_CONFIG_VARS=file-name  to use it <<<<<<<<
-
+  
 ----------------------------------------------------------------
 EOF
 }
@@ -95,7 +95,7 @@ function apply_storage_class () {
   fi
 
   kubectl apply -f "$__ENV/storageclass.yaml"
-
+ 
   if [[ $? == 1 ]]; then
     printErr "create-cluster.sh: couldn't create storageclasses"
     echo ""
@@ -182,20 +182,20 @@ function deploy_cert_manager {
   fi
 
   printInfo "creating Cert Manager namespace"
-  kubectl create namespace cert-manager
+  kubectl create namespace cert-manager 
   if [[ $? != 0 ]]; then
     printInfo "couldn't create namespace. already exists?"
   fi
-
+  
   helm install cert-manager jetstack/cert-manager \
     --namespace cert-manager \
-    --values "$__ROOT/config/cluster/certmanager-ctrller-values.yaml"
-
+    --values "$__ROOT/config/cluster/certmanager-ctrller-values.yaml" 
+  
   if [[ $? == 1 ]]; then
     printErr "$__THIS: Helm install DIDN'T complete successulfly"
-    return 1
+    return 1  
   fi
-
+  
   printStatusMsg "Cert Manager successuly deployed"
   return 0
 
@@ -341,9 +341,7 @@ function main {
   printStatusMsg "cluster $PKS_CLUSTER_NAME successfuly created and configured"
 }
 
-
 setup_required_environment_context
-
 
 # __CTX: current file path
 __CTX="${BASH_SOURCE[0]}"
@@ -367,9 +365,8 @@ if [ -z "$PKS_ENV" ]; then
   printErr "$__THIS: Needs enviroment to target. set export PKS_ENV with one of you environenmet names in $__ROOT/env"
   exit 1
 fi
-# __ENV: target enviroment config dir
+# __ENV: target enviroment config dir 
 __ENV="$__ROOT/env/$PKS_ENV"
-
 
 main "$@"
  

@@ -1,8 +1,0 @@
-
-# export PKS_CLUSTER_NETWORK_PROFILE=nsx_ing_controller_false
-export PKS_CLUSTER_NAME=dev02
-export PKS_CLUSTER_HOSTNAME="${PKS_CLUSTER_NAME}.pks.${PKS_DOMAIN_NAME}"
-export PKS_CLUSTER_PLAN=small
-export PKS_CLUSTER_WAIT=true
-export PKS_CLUSTER_INSTALL_INGRESS=true
-export PKS_CLUSTER_CONFIG_VARS=cluster01

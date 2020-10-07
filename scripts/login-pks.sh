@@ -28,3 +28,4 @@ pks login -a \
     --skip-ssl-validation \
     -u admin \
     -p "${ADMIN_PASSWORD}"
+``
