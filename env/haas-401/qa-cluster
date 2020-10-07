@@ -8,5 +8,12 @@ export PKS_CLUSTER_PLAN=large
 export PKS_CLUSTER_WAIT=true
 export PKS_CLUSTER_INSTALL_INGRESS=true
 
+
+export PKS_CLUSTER_APPLY_STORAGECLASS=false
+export PKS_CLUSTER_APPLY_RBAC=true
+export PKS_CLUSTER_DEPLOY_INGRESS=true
+export PKS_CLUSTER_DEPLOY_CERTMAN=true
+export PKS_CLUSTER_DEPLOY_DYNATRACE=true
+
 # self reference. value must be the same as this file's name
 export PKS_CLUSTER_ENV=qa-cluster
