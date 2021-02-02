@@ -4,6 +4,8 @@ __DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
 source $__DIR/helpers.sh
 
+## TODO: All download must come form s3
+
 function download_om () {
     local version="${1:-5.0.0}"
     local arch="${2:- b linux}"
@@ -39,6 +41,18 @@ function download_jq () {
     download_and_install $release_location /usr/local/bin/jq
 }
 
+function download_yq () {
+    local version="${1:-1.6}"
+    local arch="${2:-linux64}"
+
+    local bin_name="jq-$arch"
+
+    local release_url="https://github.com/stedolan/jq/releases/download/jq-$version/$bin_name"
+
+    local release_location=$(printf $release_url $version $bin_name)
+
+    download_and_install $release_location /usr/local/bin/jq
+}
 
 function download_pivnet_cli () {
     local version="${1:-1.0.4}"
@@ -79,14 +93,35 @@ function download_helm () {
     rm -rf $arch
 }
 
-function download_pks_cli () {
+# need_test
+function download_tkgi_cli () {
     [[ -f "${__DIR}/login-pivnet.sh" ]] &&  \
         source "${__DIR}/login-pivnet.sh" ||  \
         echo "login-pivnet.sh not found"
 
-    pivnet download-product-files --product-slug='pivotal-container-service' --release-version='1.8.1' --product-file-id=737302
+    pivnet_login
+
+    pivnet download-product-files --product-slug='pivotal-container-service' --release-version="$TKGI_VERSION" --product-file-id=737302
     
     local bin_name="pks-linux-amd64-1.8.0-build.75"
     
-    chmod_and_mv $__DIR/$bin_name /usr/local/bin/pks
+    chmod_and_mv $__DIR/$bin_name /usr/local/bin/tkgi
+}
+
+function download_kubectx () {
+    local version="${1:-v0.9.1}"
+
+    release="https://github.com/ahmetb/kubectx/releases/download/$version/kubectx"
+
+    local bin_name="kubectx"
+    download_and_install $release /usr/local/bin/kubectx
+}
+
+function download_kubens () {
+    local version="${1:-v0.9.1}"
+
+    release="https://github.com/ahmetb/kubectx/releases/download/$version/kubens"
+
+    local bin_name="kubens"
+    download_and_install $release /usr/local/bin/kubens
 }

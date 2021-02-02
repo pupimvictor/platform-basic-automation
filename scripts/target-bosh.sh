@@ -2,15 +2,10 @@
 
 __DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
-[[ -f "${__DIR}/set-om-creds.sh" ]] &&  \
- source "${__DIR}/set-om-creds.sh" ||  \
- echo "set-om-creds.sh not found"
-
 CREDS=$(om -t $OM_TARGET --skip-ssl-validation curl --silent \
      -p /api/v0/deployed/director/credentials/bosh_commandline_credentials | \
   jq -r .credential | sed 's/bosh //g')
 
-echo CREDS
 echo "${CREDS}"
 
 # this will set BOSH_CLIENT, BOSH_ENVIRONMENT, BOSH_CLIENT_SECRET, and BOSH_CA_CERT

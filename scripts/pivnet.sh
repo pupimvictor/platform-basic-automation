@@ -24,5 +24,3 @@ function pivnet_login () {
     echo "Pivnet Login..."
     pivnet login --api-token=$PIVNET_TOKEN $pivnet_host
 }
-
-pivnet_login
