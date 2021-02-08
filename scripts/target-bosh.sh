@@ -15,6 +15,7 @@ for VAR in "${array[@]}"; do
   export $VAR
 done
 
+# todo: fiz opsman keys path
 OM_RSA_KEY=${OM_KEY:-~/.ssh/opsmanrsa}
 export BOSH_ALL_PROXY="ssh+socks5://ubuntu@$OM_TARGET:22?private-key=$OM_RSA_KEY"
 

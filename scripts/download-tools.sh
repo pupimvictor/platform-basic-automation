@@ -125,3 +125,11 @@ function download_kubens () {
     local bin_name="kubens"
     download_and_install $release /usr/local/bin/kubens
 }
+
+function download_kube_ps1 () {
+    release="https://raw.githubusercontent.com/jonmosco/kube-ps1/master/kube-ps1.sh"
+
+    wget $release -o kube-ps1
+    mv kube-ps1 /usr/local/bin/kube-ps1
+    echo "source /usr/local/bin/kube-ps1" >> ~/.bashrc
+}
