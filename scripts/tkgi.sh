@@ -1,8 +1,6 @@
 #!/bin/bash -e
 
 __DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
-source $__DIR/helpers.sh
-
 
 function tkgi_admin_login () {
   if [ -z "${TKGI_DOMAIN_NAME}" ]; then
@@ -30,7 +28,7 @@ function tkgi_admin_login () {
       "https://${TKGI_SUBDOMAIN_NAME}.${TKGI_DOMAIN_NAME}" \
       --skip-ssl-validation \
       -u admin \
-      -p "${ADMIN_PASSWORD}"
+      -p "${ADMIN_PASSWORD}" -k
 }
 
 function cluster_admin_access () {
@@ -44,7 +42,7 @@ function cluster_admin_access () {
     CLUSTER_NAME="${1}"
   fi
 
-  tkgi-login
+  tkgi_login
 
   tkgi get-credentials "${CLUSTER_NAME}"
 
@@ -78,7 +76,7 @@ function tkgi_login () {
       "https://${TKGI_SUBDOMAIN_NAME}.${TKGI_DOMAIN_NAME}" \
       --skip-ssl-validation \
       -u "${LDAP_USER_ID}" \
-      -p "${PASSWORD}"
+      -p "${PASSWORD}" -k
 
   tkgi clusters
 }
@@ -106,7 +104,7 @@ function cluster_access () {
       "https://${TKGI_SUBDOMAIN_NAME}.${TKGI_DOMAIN_NAME}" \
       --skip-ssl-validation \
       -u "${LDAP_USER_ID}" \
-      -p "${PASSWORD}"
+      -p "${PASSWORD}" -k
 
   kubectl config get-contexts
 }

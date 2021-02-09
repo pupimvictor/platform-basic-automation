@@ -4,7 +4,6 @@
 function download_and_install () {
     local release_location="${1:- Need release location}"
     local install_location="${2:- Need install location}"
-    local install_location="${2:- Need install location}"
     
     printHeader "Downloading from $release_location"
     

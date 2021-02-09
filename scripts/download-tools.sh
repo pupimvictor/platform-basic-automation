@@ -2,8 +2,6 @@
 
 __DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
-source $__DIR/helpers.sh
-
 ## TODO: All download must come form s3
 
 function download_om () {
@@ -26,6 +24,10 @@ function download_uaa () {
     local bin_name="uaa-$arch-$version"
     
     download_and_install $release_location /usr/local/bin/uaa
+}
+
+function download_uaac_gem () {
+    gem install cf-uaac
 }
 
 function download_jq () {
@@ -132,4 +134,6 @@ function download_kube_ps1 () {
     wget $release -o kube-ps1
     mv kube-ps1 /usr/local/bin/kube-ps1
     echo "source /usr/local/bin/kube-ps1" >> ~/.bashrc
+
+    source ~/.bashrc
 }

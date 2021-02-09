@@ -1,7 +1,5 @@
 #!/bin/bash -e
 
-__DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-
 CREDS=$(om -t $OM_TARGET --skip-ssl-validation curl --silent \
      -p /api/v0/deployed/director/credentials/bosh_commandline_credentials | \
   jq -r .credential | sed 's/bosh //g')
@@ -25,7 +23,4 @@ export BOSH_CA_CERT="$(om -t $OM_TARGET --skip-ssl-validation certificate-author
 echo BOSH_CA_CERT
 echo "${BOSH_CA_CERT}"
 
-export CREDHUB_CLIENT=$BOSH_CLIENT
-export CREDHUB_SECRET=$BOSH_CLIENT_SECRET
-export CREDHUB_CA_CERT=$BOSH_CA_CERT
-export CREDHUB_SERVER="https://$BOSH_ENVIRONMENT:8844"
+
