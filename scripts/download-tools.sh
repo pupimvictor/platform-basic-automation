@@ -1,9 +1,5 @@
 #!/bin/bash -e
 
-__DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-
-## TODO: All download must come form s3
-
 function download_om () {
     local version="${1:-5.0.0}"
     local arch="${2:- b linux}"

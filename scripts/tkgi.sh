@@ -13,10 +13,6 @@ function tkgi_admin_login () {
     read -r TKGI_SUBDOMAIN_NAME
   fi
 
-  [[ -f "${__DIR}/target-bosh.sh" ]] &&  \
-    source "${__DIR}/target-bosh.sh" ||  \
-    echo "target-bosh.sh not found"
-
   ADMIN_PASSWORD=$(om credentials \
       -p pivotal-container-service \
       -c '.properties.uaa_admin_password' \
@@ -59,10 +55,6 @@ function tkgi_login () {
     echo "Enter subdomain: (e.g., haas-420)"
     read -r TKGI_SUBDOMAIN_NAME
   fi
-
-  [[ -f "${__DIR}/target-bosh.sh" ]] &&  \
-    source "${__DIR}/target-bosh.sh" ||  \
-    echo "target-bosh.sh not found"
 
   if [ -z "$LDAP_USER_ID" ]; then
     echo "Enter user id: (e.g. sa-bdade)"
